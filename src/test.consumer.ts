@@ -10,14 +10,11 @@ export class TestConsumer implements OnModuleInit{
 
     async onModuleInit() {
         console.log("onModuleInit")
-        await this.consumerService.consume({topic: 'test'}, {
-            eachMessage: async ({message, topic,partition}) => {
-                console.log("consume")
-                console.log({
-                    value: message.value.toString(),
-                    topic: topic.toString(),
-                    partition: partition.toString(),
-                })
+        await this.consumerService.consume({
+            topic: {topic: 'test'},
+            config: { groupId: 'test-consumer'},
+            onMessage: async (message) => {
+             console.log(`Value - ${message.value.toString()}`);
             }
         })
     }

@@ -9,12 +9,7 @@ export class AppService {
   }
 
   async getHello(): Promise<string> {
-    await this.producerService.produce({
-      topic: 'test',
-      messages: [{
-        value: 'Hello world!'
-      }]
-    })
-    return 'Hello World!';
+    await this.producerService.produce('test', {value: 'Hello Hello world'});
+    return 'Hello Hello world';
   }
 }
